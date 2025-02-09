@@ -1,0 +1,19 @@
+{
+  "files": {
+    "main.css": "/bill_creator.git/static/css/main.f7e3d6c4.css",
+    "main.js": "/bill_creator.git/static/js/main.a0f13822.js",
+    "static/js/213.fe663231.chunk.js": "/bill_creator.git/static/js/213.fe663231.chunk.js",
+    "static/js/732.c4f3c3dc.chunk.js": "/bill_creator.git/static/js/732.c4f3c3dc.chunk.js",
+    "static/js/453.ba3fda47.chunk.js": "/bill_creator.git/static/js/453.ba3fda47.chunk.js",
+    "index.html": "/bill_creator.git/index.html",
+    "main.f7e3d6c4.css.map": "/bill_creator.git/static/css/main.f7e3d6c4.css.map",
+    "main.a0f13822.js.map": "/bill_creator.git/static/js/main.a0f13822.js.map",
+    "213.fe663231.chunk.js.map": "/bill_creator.git/static/js/213.fe663231.chunk.js.map",
+    "732.c4f3c3dc.chunk.js.map": "/bill_creator.git/static/js/732.c4f3c3dc.chunk.js.map",
+    "453.ba3fda47.chunk.js.map": "/bill_creator.git/static/js/453.ba3fda47.chunk.js.map"
+  },
+  "entrypoints": [
+    "static/css/main.f7e3d6c4.css",
+    "static/js/main.a0f13822.js"
+  ]
+}
