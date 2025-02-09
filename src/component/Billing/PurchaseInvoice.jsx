@@ -52,6 +52,15 @@ const PurchaseInvoice = () => {
     });
   };
 
+  const convertDateFormat = (dateStr) => {
+    const date = new Date(dateStr);
+
+    // Format the date to "26 October 2024"
+    const formattedDate = `${date.getDate()} ${date.toLocaleString("en-US", {
+      month: "long",
+    })} ${date.getFullYear()}`;
+    return formattedDate;
+  };
   if (invoiceData) {
     return (
       <>
@@ -71,27 +80,27 @@ const PurchaseInvoice = () => {
             {/* Invoice Header */}
             <div className="flex justify-between items-center mb-6">
               <div>
-                <h2 className="text-2xl sm:text-lg font-semibold">Date: </h2>
-                <p className="text-gray-600">
-                  {invoiceData.date.toLocaleString("en-IN", {
-                    year: "numeric", // e.g., 2024
-                    month: "long", // e.g., October
-                    day: "numeric", // 12-hour format with AM/PM
-                  })}
+                <h2 className="text-2xl sm:text-lg font-semibold">
+                  #{invoiceData.invoice_id}
+                </h2>
+                <p className="text-gray-500 font-semibold">
+                  {convertDateFormat(invoiceData.createdAt)}
                 </p>
               </div>
               <div className="text-right">
-                <h2 className="text-xl sm:text-lg font-semibold">Customer Name: </h2>
-                <p>{invoiceData.buyer.name}</p>
+                <h2 className="text-xl sm:text-lg font-semibold">
+                  Customer Name:{" "}
+                </h2>
+                <p>{invoiceData.customer_name}</p>
               </div>
             </div>
 
             {/* Invoice Table */}
             <div className="mb-6">
-              <table className="min-w-full bg-white">
+              <table className="min-w-full bg-white border">
                 <thead>
                   <tr className="bg-gray-100">
-                    <th className="py-2 px-4 text-left sm:text-sm">Sr.no</th>
+                    <th className="py-2 px-4 text-left sm:text-sm">#</th>
                     <th className="py-2 px-4 text-left sm:text-sm">Item</th>
                     <th className="py-2 text-center sm:text-sm">Quantity</th>
                     <th className="py-2 px-4 text-right sm:text-sm">Price</th>

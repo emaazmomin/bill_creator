@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from "react";
-import { FaArrowDown, FaPen } from "react-icons/fa";
+import { FaArrowDown, FaHome, FaPen } from "react-icons/fa";
 import { useLocation, useNavigate } from "react-router-dom";
 
 export default function InvoiceView() {
@@ -12,10 +12,10 @@ export default function InvoiceView() {
 
   const calculateTotal = (dataInv) => {
     const subTotal = dataInv.items.reduce(
-      (acc, item) => acc + Number(item.quantity) * Number(item.price),
+      (acc, item) => acc + item.quantity * item.price,
       0
     );
-    const dues = Number(dataInv.dueAmount);
+    const dues = Number(dataInv.due_amount);
     const total = subTotal + dues;
     return { subTotal, dues, total };
   };
@@ -38,9 +38,19 @@ export default function InvoiceView() {
     navigate("/invoice", {
       state: {
         data: invoiceData,
-        fileName: invoiceData.buyer.name,
+        fileName: invoiceData.customer_name,
       },
     });
+  };
+
+  const convertDateFormat = (dateStr) => {
+    const date = new Date(dateStr);
+
+    // Format the date to "26 October 2024"
+    const formattedDate = `${date.getDate()} ${date.toLocaleString("en-US", {
+      month: "long",
+    })} ${date.getFullYear()}`;
+    return formattedDate;
   };
 
   if (invoiceData) {
@@ -54,27 +64,27 @@ export default function InvoiceView() {
           {/* Invoice Header */}
           <div className="flex justify-between items-center mb-6">
             <div>
-              <h2 className="text-2xl sm:text-lg font-semibold">Date: </h2>
-              <p className="text-gray-600">
-                {invoiceData.date.toLocaleString("en-IN", {
-                  year: "numeric", // e.g., 2024
-                  month: "long", // e.g., October
-                  day: "numeric", // 12-hour format with AM/PM
-                })}
+              <h2 className="text-xl sm:text-lg font-semibold">
+                #{invoiceData.invoice_id}
+              </h2>
+              <p className="text-gray-500 font-semibold">
+                {convertDateFormat(invoiceData.createdAt)}
               </p>
             </div>
             <div className="text-right">
-              <h2 className="text-xl sm:text-lg font-semibold">Customer Name: </h2>
-              <p>{invoiceData.buyer.name}</p>
+              <h2 className="text-xl sm:text-lg font-semibold">
+                Customer Name:{" "}
+              </h2>
+              <p>{invoiceData.customer_name}</p>
             </div>
           </div>
 
           {/* Invoice Table */}
           <div className="mb-6">
-            <table className="min-w-full bg-white">
+            <table className="min-w-full bg-white border">
               <thead>
                 <tr className="bg-gray-100">
-                  <th className="py-2 px-4 text-left">Sr.no</th>
+                  <th className="py-2 px-4 text-left">#</th>
                   <th className="py-2 px-4 text-left">Item</th>
                   <th className="py-2 text-center">Quantity</th>
                   <th className="py-2 px-4 text-right">Price</th>
@@ -116,6 +126,15 @@ export default function InvoiceView() {
           <button
             className="bg-green-500 text-white px-4 py-2 rounded-md flex gap-x-2 items-center"
             onClick={() => {
+              navigate("/");
+            }}
+          >
+            <span>Home</span>
+            <FaHome />
+          </button>
+          <button
+            className="bg-yellow-500 text-white px-4 py-2 rounded-md flex gap-x-2 items-center"
+            onClick={() => {
               navigate("/", {
                 state: {
                   data: invoiceData,
@@ -133,11 +152,8 @@ export default function InvoiceView() {
               downloadInvoice();
             }}
           >
-            <span>
-
-            Download
-            </span>
-            <FaArrowDown/>
+            <span>Download</span>
+            <FaArrowDown />
           </button>
         </div>
       </div>

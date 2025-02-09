@@ -1,23 +1,29 @@
 import React from "react";
-import InvoiceForm from "./component/InvoiceForm";
-import PurchaseInvoice from "./component/PurchaseInvoice";
 import { createBrowserRouter, RouterProvider } from "react-router-dom";
-import Test from "./component/Test";
-import InvoiceView from "./component/InvoiceView";
+import InvoiceForm from "./component/Billing/InvoiceForm";
+import PurchaseInvoice from "./component/Billing/PurchaseInvoice";
+import InvoiceView from "./component/Billing/InvoiceView";
+import WebWrapper from "./component/Wrappers/WebWrapper";
 
 export default function AppRouters() {
   const routers = createBrowserRouter([
     {
       path: "/",
-      element: <InvoiceForm />,
-    },
-    {
-      path: "/invoice",
-      element: <PurchaseInvoice />,
-    },
-    {
-      path: "/view-invoice",
-      element: <InvoiceView />,
+      element: <WebWrapper />,
+      children: [
+        {
+          path: "/",
+          element: <InvoiceForm />,
+        },
+        {
+          path: "/invoice",
+          element: <PurchaseInvoice />,
+        },
+        {
+          path: "/view-invoice",
+          element: <InvoiceView />,
+        },
+      ],
     },
   ]);
   return <RouterProvider router={routers} />;
