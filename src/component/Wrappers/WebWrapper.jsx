@@ -2,9 +2,10 @@ import React from "react";
 import { SalesAnalyst } from "../../Context";
 import Navbar from "../Navbar";
 import { Outlet } from "react-router-dom";
+import { AppProperties } from "../../AppProperties";
 
 export default function WebWrapper() {
-  const loca = "http://localhost:5000";
+  const loca = AppProperties.loca;
 
   return (
     <div>
