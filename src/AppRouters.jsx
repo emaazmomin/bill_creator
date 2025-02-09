@@ -12,7 +12,7 @@ export default function AppRouters() {
       element: <WebWrapper />,
       children: [
         {
-          path: "/",
+          path: "/bill_creator",
           element: <InvoiceForm />,
         },
         {
